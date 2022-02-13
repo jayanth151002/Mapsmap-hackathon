@@ -1,14 +1,14 @@
 import './App.css';
 import { Routes, Route, Redirect } from 'react-router-dom'
 import Home from './components/Home';
-import AddQuestion from './components/AddQuestions';
+import AskQuestion from './components/AskQuestions';
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/addquestion' element={<AddQuestion />} />
+        <Route path='/askquestion' element={<AskQuestion />} />
       </Routes>
     </div>
   );
