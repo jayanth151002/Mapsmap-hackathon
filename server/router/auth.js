@@ -10,9 +10,8 @@ router.get('/data', async (req, res) => {
 })
 
 router.post('/addquestion', async (req, res) => {
-    const question = req.body.question
-    const body = req.body.body
-    console.log(question, body)
+    const qndata = { question: req.body.question, body: req.body.body }
+    console.log(qndata)
     res.status(200).send("Question received")
 })
 
