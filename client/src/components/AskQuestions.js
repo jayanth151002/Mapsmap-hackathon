@@ -8,7 +8,7 @@ const AskQuestion = () => {
     const postQuestion = (e) => {
         e.preventDefault()
         console.log(question, body)
-        axios.post('/addquestion', { question: question, body: body })
+        axios.post('/question/addquestion', { question: question, body: body })
             .then(res => console.log(res.data))
     }
 

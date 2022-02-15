@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Routes, Route, useParams } from "react-router-dom";
 import Home from "./components/Home";
 import AskQuestion from "./components/AskQuestions";
-import  QuestionPage  from "./components/Question";
+import QuestionPage from "./components/Question";
 import { Update_UpVote } from "./redux/ActionCreator";
 import { Update_DownVote } from "./redux/ActionCreator";
 const mapStateToProp = (state) => ({
