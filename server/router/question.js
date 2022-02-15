@@ -2,10 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 
-router.post('/addquestion', async (req, res) => {
-    const qndata = { question: req.body.question, body: req.body.body }
-    console.log(qndata)
-    res.status(200).send("Question received")
-})
+const questionController = require('../controller/question_controller');
+
+router.post('/addquestion', questionController.create);
 
 module.exports = router;
