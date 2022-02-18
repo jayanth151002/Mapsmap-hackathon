@@ -13,6 +13,8 @@ const questionSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Tag"
     }
+}, {
+    timestamps: true,
 })
 
 const Question = mongoose.model('Question', questionSchema)
