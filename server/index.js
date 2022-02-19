@@ -1,4 +1,4 @@
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
 const express = require("express");
 const app = express();
@@ -9,8 +9,7 @@ app.use(express.static(path.join(__dirname, "../client/public")));
 app.use(cors());
 app.use(auth);
 
-
-require('./config/mongoConnection');
+require("./config/mongoConnection");
 
 // app.use("/api", require("./routes"))
 
