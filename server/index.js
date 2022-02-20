@@ -1,4 +1,4 @@
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
 const express = require("express");
 const passport = require('passport');
@@ -19,6 +19,7 @@ app.use(cors());
 app.use("/", require('./routes'));
 
 require('./config/mongoConnection');
+
 
 // app.use("/api", require("./routes"))
 
