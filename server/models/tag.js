@@ -5,7 +5,7 @@ const tagSchema = new mongoose.Schema({
         type: 'string',
         required: true
     }
-})
+}, { timestamps: true })
 
 const Tag = mongoose.model('Tag', tagSchema)
 module.exports = Tag;
