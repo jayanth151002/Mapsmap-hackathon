@@ -17,9 +17,13 @@ const commentSchema = mongoose.Schema(
     likes:{
       type: Number,
       default: 0
+    },
+    dislikes:{
+      type: Number,
+      default: 0
     }
   });
 
-const Comment = mongoose.model("Comment", commentSchema);
+const Comment = mongoose.model("comment", commentSchema);
 
 module.exports = Comment;

@@ -1,96 +1,126 @@
-const Vote = require("../model/vote");
 const Question = require("../model/question");
 const Comment = require("../model/comment");
+const Like = require("../model/like");
+const Vote = require("../model/vote");
 
 module.exports.upVote = async function (req, res) {
-    const { question_id, user_id } = req.query;
-    const question = await Question.findById(question_id);
+  const question_id = req.body.question_id;
+  const user_id = req.params.id;
+  const question = await Question.findById(question_id);
+  //Tracking user votes
+  const existingVote = await Vote.findOne({
+    user: user_id,
+    question: question_id,
+  });
+  if (existingVote) {
+    if (existingVote.type === "down") {
+      question.vote += 2;
+      existingVote.type = "up";
+      await question.save();
+      await existingVote.save();
+    } else {
+      return res.status(403).json("You have already voted this question");
+    }
+  } else {
     question.vote += 1;
     question.save();
-    //Tracking user votes
-    const existingVote = await Like.findOne({
+    new Vote({
       user: user_id,
-      question: question._id,
-      type: 'up'
-    });
-
-    if (!existingVote) {
-      new Vote({
-        user: user_id,
-        question: question._id,
-        type: 'up'
-      }).save();
-    }
-    
-    return  Response(res, 200, 'Question Upvoted!', question);
+      question: question_id,
+      type: "up",
+    }).save();
+  }
+  return res.status(200).json("Question upVoted!");
 };
 
 module.exports.downVote = async function (req, res) {
-    const { question_id, user_id } = req.query;
-    const question = await Question.findById(question_id);
-      question.vote -= 1;
-      question.save();
-      //Tracking user votes
-      const existingVote = await Like.findOne({
-        user: user_id,
-        question: question._id,
-        type: 'down'
-      });
-
-      if(!existingVote){
-        new Vote({
-          user: user_id,
-          question: question._id,
-          type: 'down'
-        }).save();
-      }
-      return  Response(res, 200, 'Question Downvoted!', question);
+  const question_id = req.body.question_id;
+  const user_id = req.params.id;
+  const question = await Question.findById(question_id);
+  //Tracking user votes
+  const existingVote = await Vote.findOne({
+    user: user_id,
+    question: question_id,
+  });
+  if (existingVote) {
+    if (existingVote.type === "up") {
+      question.vote -= 2;
+      existingVote.type = "down";
+      await question.save();
+      await existingVote.save();
+    } else {
+      return res.status(403).json("You have already voted this question");
+    }
+  } else {
+    question.vote -= 1;
+    question.save();
+    new Vote({
+      user: user_id,
+      question: question_id,
+      type: "down",
+    }).save();
+  }
+  return res.status(200).json("Question downVoted!");
 };
 
 module.exports.like = async function (req, res) {
-    const {comment_id ,user_id} = req.query;
-    const comment = await Comment.findById(comment_id);
-    comment.like+=1;
-    comment.save();
-
-    const existingLike = await Like.findOne({
-      user: user_id,
-      comment: comment._id,
-      type: 'like'
-    });
-
-    if (!existingLike) {
-      new Vote({
-        user: user_id,
-        comment: comment._id,
-        type: 'like'
-      }).save();
-    }
-    
-    return  Response(res, 200, 'Comment Liked!', comment);
-
-};
-
-module.exports.dislike = async function (req, res) {
-  const {comment_id ,user_id} = req.query;
+  const comment_id = req.body.comment_id;
+  const user_id = req.params.id;
   const comment = await Comment.findById(comment_id);
-  comment.like-=1;
-  comment.save();
 
   const existingLike = await Like.findOne({
     user: user_id,
-    comment: comment._id,
-    type: 'dislike'
+    comment: comment_id,
   });
-
-  if (!existingLike) {
-    new Vote({
+  if (existingLike) {
+    if (existingLike.type === "dislike") {
+      comment.likes += 1;
+      comment.dislikes -= 1;
+      existingLike.type = "like";
+      await comment.save();
+      await existingLike.save();
+    } else {
+      return res.status(403).json("You have already liked this comment");
+    }
+  } else {
+    comment.likes += 1;
+    comment.save();
+    new Like({
       user: user_id,
-      comment: comment._id,
-      type: 'dislike'
+      comment: comment_id,
+      type: "like",
     }).save();
   }
-  
-  return  Response(res, 200, 'Comment Liked!', comment);
+  return res.status(200).json({data:{comment},message :"Comment Liked!"});
+};
 
+module.exports.dislike = async function (req, res) {
+  const comment_id = req.body.comment_id;
+  const user_id = req.params.id;
+  const comment = await Comment.findById(comment_id);
+
+  const existingDisLike = await Like.findOne({
+    user: user_id,
+    comment: comment_id,
+  });
+  if (existingDisLike) {
+    if (existingDisLike.type === "like") {
+      comment.likes -= 1;
+      comment.dislikes += 1;
+      existingDisLike.type = "dislike";
+      await comment.save();
+      await existingDisLike.save();
+    } else {
+      return res.status(403).json("You have already disliked this comment");
+    }
+  } else {
+    comment.dislikes += 1;
+    comment.save();
+    new Like({
+      user: user_id,
+      comment: comment_id,
+      type: "dislike",
+    }).save();
+  }
+  return res.status(200).json({data:{comment},message :"Comment disLiked!"});
 };
