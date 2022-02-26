@@ -34,8 +34,15 @@ module.exports.signup = async function (req, res, next) {
                     .save()
                     .then((result) => {
                       console.log(result);
-                      res.status(201).json({
-                        message: "User created",
+                      res.status(200).json({
+                        message: "Sign up successfull, user created",
+                        success: true,
+                        data: {
+                          token: jwt.sign(newUser.toJSON(), process.env.jwt_secrete_key, {
+                            expiresIn: "1 hr",
+                          }),
+                          user: newUser,
+                        }
                       });
                     })
                     .catch((err) => {
