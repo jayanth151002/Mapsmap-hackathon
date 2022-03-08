@@ -7,7 +7,6 @@ module.exports.createComment = async function (req, res) {
         const { question_id, content } = req.body;
         const question = await Question.findById(question_id);
         const user_id = req.user.id;
-        console.log(typeof(user_id))
         let comment = new Comment({
             comment: content,
             user:user_id, 
@@ -16,7 +15,6 @@ module.exports.createComment = async function (req, res) {
 
         comment = await comment.populate("user","name email")
         question.comments.push(comment);
-        // console.log(question.comments);
         await comment.save();
         await question.save();
 
@@ -40,13 +38,7 @@ module.exports.editComment = async function (req, res) {
         const user_id = req.user.id;
         
         if (comment.user == user_id) {
-            console.log("hi")
             comment.comment = content;
-            // await Question.findByIdAndUpdate(question_id, {
-            //     $pull: {
-            //         comments: comment_id,
-            //     },
-            // });
             question.comments.pull(comment_id);
             question.comments.push(comment);
             await comment.save();
@@ -69,7 +61,7 @@ module.exports.deleteComment = async function (req, res) {
     try {
         const { question_id, comment_id } = req.body;
         const comment = await Comment.findById(comment_id);
-        const user_id = req.user._id;
+        const user_id = req.user.id;
 
         if (comment.user == user_id) {
             await Question.findByIdAndUpdate(question_id, {
@@ -93,7 +85,6 @@ module.exports.getComment = async function (req, res) {
     try {
         const { question_id } = req.body;
         let questionComments = await Question.findById(question_id).populate("comments");
-        console.log(questionComments)
         return res.status(200).json({
             "message": "List of comments on " + question_id,
             "success": true,
