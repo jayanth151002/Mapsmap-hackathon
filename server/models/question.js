@@ -9,10 +9,10 @@ const questionSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    tags: {
+    tags: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Tag",
-    },
+    }],
     vote: {
         type: Number,
         default: 0,
