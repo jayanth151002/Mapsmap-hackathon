@@ -3,17 +3,20 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 module.exports.createUser = async function (req, res) {
+  console.log("hi", req.body);
   if (req.body.password != req.body.confirm_password) {
     return res.redirect("back");
   }
   const { name, email } = req.body;
   const password = await bcrypt.hash(req.body.password, 12);
-
+  console.log({ name, email, password });
   try {
     let user = await User.findOne({ email: email });
 
     if (!user) {
       let newUser = await User.create({ name, email, password });
+      console.log("create user ", newUser, { name, email, password });
+      console.log(newUser);
       return res.status(200).json({
         message: "Sign up successfull, user created",
         success: true,
@@ -25,7 +28,7 @@ module.exports.createUser = async function (req, res) {
         }
       });
     } else {
-      return res.redirect("back");
+      return res.status(403).json({ message: "duplicate email address", data: null })
     }
   } catch (err) {
     if (err) {
