@@ -1,16 +1,16 @@
-const Comment = require("../model/comment");
-const Question = require("../model/question");
+const Comment = require("../models/comment");
+const Question = require("../models/question");
 
 
 module.exports.create = async function (req, res) {
     try {
-        const { question_id, content,user_id } = req.body;
+        const { question_id, content, user_id } = req.body;
         const question = await Question.findById(question_id);
 
         const comment = new Comment({
             comment: content,
             user: user_id,
-            question:question_id
+            question: question_id
         })
 
         question.comments.push(comment);

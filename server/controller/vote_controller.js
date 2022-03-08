@@ -1,7 +1,7 @@
-const Question = require("../model/question");
-const Comment = require("../model/comment");
-const Like = require("../model/like");
-const Vote = require("../model/vote");
+const Question = require("../models/question");
+const Comment = require("../models/comment");
+const Like = require("../models/like");
+const Vote = require("../models/vote");
 
 module.exports.upVote = async function (req, res) {
   const question_id = req.body.question_id;
@@ -91,7 +91,7 @@ module.exports.like = async function (req, res) {
       type: "like",
     }).save();
   }
-  return res.status(200).json({data:{comment},message :"Comment Liked!"});
+  return res.status(200).json({ data: { comment }, message: "Comment Liked!" });
 };
 
 module.exports.dislike = async function (req, res) {
@@ -122,5 +122,5 @@ module.exports.dislike = async function (req, res) {
       type: "dislike",
     }).save();
   }
-  return res.status(200).json({data:{comment},message :"Comment disLiked!"});
+  return res.status(200).json({ data: { comment }, message: "Comment disLiked!" });
 };
