@@ -12,7 +12,11 @@ const questionSchema = new mongoose.Schema({
     tags: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Tag"
-    }
+    },
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+    },
 })
 
 const Question = mongoose.model('Question', questionSchema)
