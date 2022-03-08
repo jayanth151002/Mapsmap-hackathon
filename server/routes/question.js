@@ -1,8 +1,6 @@
 const express = require('express');
 const passport = require('passport');
 require('../config/passports')(passport);
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 
 const router = express.Router();
 

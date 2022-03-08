@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 
 const voteController = require("../controller/vote_controller");
 
