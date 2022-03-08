@@ -16,7 +16,7 @@ const voteSchema = new mongoose.Schema({
     trim: true,
     enum: ["up", "down"],
   },
-});
+}, { timestamps: true });
 
 const Vote = mongoose.model("vote", voteSchema);
 module.exports = Vote;

@@ -16,7 +16,7 @@ const voteSchema = new mongoose.Schema({
     trim: true,
     enum: ["like", "dislike"],
   },
-});
+}, { timestamps: true });
 
 const Like = mongoose.model("like", voteSchema);
 module.exports = Like;
