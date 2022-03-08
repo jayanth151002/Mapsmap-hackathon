@@ -6,7 +6,7 @@ app.use(express.json());
 app.use(router);
 
 router.use("/question", require("./question"));
-router.use("/users", require("./user"));
+router.use("/user", require("./user"));
 router.use("/tag", require("./tag"));
 router.use("/comment", require("./comment"));
 router.use("/vote", require("./vote"));

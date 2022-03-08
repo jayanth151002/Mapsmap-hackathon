@@ -5,3 +5,15 @@ module.exports.getQuestions = async function (req, res) {
     const tag = await Tag.findById(tagId).populate("questions");
     return tag.questions;
 }
+
+module.exports.create = async function (req, res) {
+    const { title } = req.body;
+    const tag = await Tag.create({ title });
+    return res.status(200).json({
+        message: "Tag created successfully",
+        success: true,
+        data: {
+            tag
+        },
+    });
+}
