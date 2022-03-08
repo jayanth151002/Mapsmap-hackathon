@@ -1,16 +1,25 @@
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
 const express = require("express");
+const passport = require('passport');
+
+
 const app = express();
+app.use(passport.initialize());
+
+app.use(express.json());
+
+
 const path = require("path");
 const cors = require("cors");
-const auth = require("./router/auth");
+
 app.use(express.static(path.join(__dirname, "../client/public")));
 app.use(cors());
-app.use(auth);
 
+app.use("/", require('./routes'));
 
 require('./config/mongoConnection');
+
 
 // app.use("/api", require("./routes"))
 

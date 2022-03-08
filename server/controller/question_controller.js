@@ -1,5 +1,5 @@
-const Question = require("../model/question");
-const Tag = require("../model/tag");
+const Question = require("../models/question");
+const Tag = require("../models/tag");
 
 module.exports.create = async function (req, res) {
     try {
@@ -10,7 +10,7 @@ module.exports.create = async function (req, res) {
             body
         })
 
-        tags.forEach(tagId => {
+        tags.forEach(async tagId => {
             const tag = await Tag.findById(tagId).populate("question");
             tag.questions.push(question);
             tag.save();

@@ -1,4 +1,4 @@
-const Tag = require('../model/tag')
+const Tag = require('../models/tag')
 
 module.exports.getQuestions = async function (req, res) {
     const tagId = req.query.tagId;
