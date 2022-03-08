@@ -4,8 +4,8 @@ const Like = require("../models/like");
 const Vote = require("../models/vote");
 
 module.exports.upVote = async function (req, res) {
-  const question_id = req.body.question_id;
-  const user_id = req.params.id;
+  const question_id = req.query.question_id;
+  const user_id = req.user.id;
   const question = await Question.findById(question_id);
   //Tracking user votes
   const existingVote = await Vote.findOne({
@@ -34,8 +34,8 @@ module.exports.upVote = async function (req, res) {
 };
 
 module.exports.downVote = async function (req, res) {
-  const question_id = req.body.question_id;
-  const user_id = req.params.id;
+  const question_id = req.query.question_id;
+  const user_id = req.user.id;
   const question = await Question.findById(question_id);
   //Tracking user votes
   const existingVote = await Vote.findOne({
@@ -64,8 +64,8 @@ module.exports.downVote = async function (req, res) {
 };
 
 module.exports.like = async function (req, res) {
-  const comment_id = req.body.comment_id;
-  const user_id = req.params.id;
+  const comment_id = req.query.comment_id;
+  const user_id = req.user.id;
   const comment = await Comment.findById(comment_id);
 
   const existingLike = await Like.findOne({
@@ -95,8 +95,8 @@ module.exports.like = async function (req, res) {
 };
 
 module.exports.dislike = async function (req, res) {
-  const comment_id = req.body.comment_id;
-  const user_id = req.params.id;
+  const comment_id = req.query.comment_id;
+  const user_id = req.user.id;
   const comment = await Comment.findById(comment_id);
 
   const existingDisLike = await Like.findOne({
