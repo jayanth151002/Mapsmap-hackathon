@@ -5,9 +5,19 @@ const Home = () => {
 
   return (
     <div>
-      <button>
-        <Link to="/askquestion">Ask Question</Link>
-      </button>
+      <div className=" m-3">
+        <button className="btn btn-primary">
+          <Link to="/login" style={{ color: "white", textDecoration: "none" }}>Login</Link>
+        </button>
+      </div>
+      <div style={{ minHeight: "50vh" }}>
+
+      </div>
+      <div className="text-center">
+        <button className="btn btn-primary">
+          <Link to="/askquestion" style={{ color: "white", textDecoration: "none" }}>Ask Question</Link>
+        </button>
+      </div>
     </div>
   );
 };

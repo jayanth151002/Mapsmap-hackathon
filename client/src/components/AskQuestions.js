@@ -13,16 +13,16 @@ const AskQuestion = () => {
     }
 
     return (
-        <div>
+        <div className="container">
             Question
             <form>
                 <div>
-                    <input type="text" placeholder="Question" onChange={(e) => setQn(e.target.value)} />
+                    <input type="text" className="form-control" placeholder="Question" onChange={(e) => setQn(e.target.value)} />
                 </div>
                 <div>
-                    <textarea placeholder="Body" onChange={(e) => setBody(e.target.value)} />
+                    <textarea placeholder="Body" className="form-control" onChange={(e) => setBody(e.target.value)} />
                 </div>
-                <button type="submit" onClick={postQuestion}>Ask</button>
+                <button type="submit" className="btn btn-primary" onClick={postQuestion}>Ask</button>
             </form>
         </div>
     )
