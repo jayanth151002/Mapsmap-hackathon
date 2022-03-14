@@ -6,6 +6,7 @@ const Question = () => {
   const [question, setQuestion] = useState("");
   const [body, setBody] = useState("")
   const [vote, setVote] = useState("")
+  const [qn_id, setQnid] = useState('')
   const { id } = useParams();
   useEffect(() => {
     axios.get(`https://mapsmap.herokuapp.com/v1/api/question/?questionId=${id}`)
@@ -14,6 +15,7 @@ const Question = () => {
         setQuestion(response.data.data.question.question);
         setBody(response.data.data.question.body)
         setVote(response.data.data.question.vote)
+        setQnid(response.data.data.question._id)
       })
       .catch((err) => console.log("Error is --->", err));
   }, []);
@@ -24,13 +26,17 @@ const Question = () => {
         <div className="row">
           <div className="col-1">
             <div>
-              <button>
+              <button className="btn btn-success" onClick={() => {
+                axios.put(`https://mapsmap.herokuapp.com/v1/api/vote/upvote?question_id=${qn_id}`)
+              }}>
                 <i class="fa fa-arrow-up"></i>
               </button>
             </div>
-            <div className="mx-2">{vote}</div>
+            <div className="text-center mt-1 mb-1">{vote}</div>
             <div>
-              <button>
+              <button className="btn btn-danger" onClick={() => {
+                axios.put(`https://mapsmap.herokuapp.com/v1/api/vote/downvote?question_id=${qn_id}`)
+              }}>
                 <i class="fa fa-arrow-down"></i>
               </button>
             </div>
