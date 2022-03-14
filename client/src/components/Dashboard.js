@@ -3,25 +3,16 @@ import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from "reactstrap";
 const Dashboard = () => {
   const data = useLocation().state;
 
+  localStorage.setItem("token", data.data.data.token);
   if (data) {
-    console.log(data.data.data);
-    localStorage.setItem("token", data.data.data.token);
     return (
       <div>
-        <Navbar style={{ backgroundColor: "#000" }}>
-          <NavbarBrand href="/" style={{ color: "#fff" }}>
+        <Navbar className="mb-3" style={{ backgroundColor: "#000" }}>
+          <NavbarBrand style={{ color: "#fff" }} className="mx-auto" href="/">
             MAPSMAP
           </NavbarBrand>
-
-          <Nav navbar>
-            <NavItem>
-              <NavLink href="/login">
-                <button className="btn btn-primary">Login</button>
-              </NavLink>
-            </NavItem>
-          </Nav>
         </Navbar>
-        <div>
+        <div className="mt-3">
           Dashboard
           <div className="mt-3">
             <button className="btn btn-primary">
