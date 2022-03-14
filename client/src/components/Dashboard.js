@@ -1,10 +1,11 @@
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useParams } from 'react-router-dom';
 import { useState } from 'react';
 
 const Dashboard = () => {
 
     const data = useLocation().state
     localStorage.setItem('token', data.data.data.token)
+    const { id } = useParams()
 
     if (data)
         return (
@@ -12,10 +13,10 @@ const Dashboard = () => {
                 Dashboard
                 <div>
                     <button className="btn btn-primary">
-                        <Link to="/tag/622f59196cd075ed2d5da424" style={{ color: "white", textDecoration: "none" }}>Ask Question</Link>
+                        <Link to={"/tags/" + id} style={{ color: "white", textDecoration: "none" }}>See Questions</Link>
                     </button>
-                </div>
-            </div>
+                </div >
+            </div >
         )
     else
         return (
