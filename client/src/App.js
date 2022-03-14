@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Dashboard from "./components/Dashboard";
 import Tags from "./components/Tags";
+import NavbarMap from "./components/Navbar";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -15,14 +16,15 @@ class App extends Component {
   render() {
     return (
       <div>
+        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/askquestion" element={<AskQuestion />} />
           <Route path="/question/:id" element={<Question />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
-          <Route path='/dashboard' element={<Dashboard />} />
-          <Route path='/tag/:tagId' element={<Tags />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/tag/:tagId" element={<Tags />} />
         </Routes>
       </div>
     );
