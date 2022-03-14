@@ -11,6 +11,7 @@ import Tags from "./components/Tags";
 import define from "./map"
 import { Runtime, Library, Inspector } from "./runtime.js";
 
+import NavbarMap from "./components/Navbar";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -20,6 +21,7 @@ class App extends Component {
     const main = runtime.module(define, Inspector.into(document.body));
     return (
       <div>
+        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/askquestion" element={<AskQuestion />} />
