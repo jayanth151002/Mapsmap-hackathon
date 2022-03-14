@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import axios from "axios"
 import { useState, useEffect } from "react"
 
@@ -11,13 +11,10 @@ const Tags = () => {
     useEffect(() => {
         axios.get(`https://mapsmap.herokuapp.com/v1/api/tag?tagId=${tagId}`)
             .then(res => {
+                console.log(res.data.data)
                 setTagname(res.data.data.tag.title)
                 setTagqns(res.data.data.tag.questions)
             })
-            .then(() => console.log(tagQns))
-
-
-
     }, [])
 
 
@@ -29,14 +26,22 @@ const Tags = () => {
         }
         else {
             const cards = tagQns.map((qn, n) => {
+                const url = `/question/${qn._id}`
                 return (
-                    <div className="card card-body">
-                        {n}
+                    <div className="card mt-3 mb-3">
+                        <div className="card-head">
+                            {qn.question}
+                        </div>
+                        <hr />
+                        <div className="card-body">
+                            {qn.body}
+                        </div>
+                        <div>Click here to <Link to={url} style={{ textDecoration: "none" }}>follow</Link> the forum.</div>
                     </div>
                 )
             })
             return (
-                <div>
+                <div className="container">
                     {cards}
                 </div>
             )
