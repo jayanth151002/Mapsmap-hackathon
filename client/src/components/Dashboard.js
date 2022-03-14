@@ -4,7 +4,7 @@ import { useState } from 'react';
 const Dashboard = () => {
 
     const data = useLocation().state
-    console.log(data)
+    localStorage.setItem('token', data.data.data.token)
 
     if (data)
         return (
