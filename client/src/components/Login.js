@@ -6,6 +6,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
   const handleLogin = (e) => {
     e.preventDefault();
     if (email === "" || password === "") alert("Enter Proper Credentials!!!");
@@ -16,7 +17,8 @@ const Login = () => {
           password: password,
         })
         .then((res) => {
-          navigate("/dashboard", { state: res.data });
+          navigate("/dashboard", { state: { data: res.data } });
+          console.log(res.data);
         })
         .catch((res) => console.log("err"));
     }

@@ -8,6 +8,7 @@ const Login = () => {
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
   const navigate = useNavigate();
+
   const handleLogin = (e) => {
     e.preventDefault();
     if (email === "" || password1 === "" || password2 === "" || name === "")
@@ -22,7 +23,8 @@ const Login = () => {
           confirm_password: password2,
         })
         .then((res) => {
-          navigate("/dashboard", { state: res.data });
+          navigate("/dashboard", { state: { data: res.data } });
+          console.log(res.data);
         })
         .catch((res) => console.log(res));
     }
