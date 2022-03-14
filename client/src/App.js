@@ -7,6 +7,8 @@ import AskQuestion from "./components/AskQuestions";
 import QuestionPage from "./components/Question";
 import { Update_UpVote } from "./redux/ActionCreator";
 import { Update_DownVote } from "./redux/ActionCreator";
+import define from "./map";
+import { Runtime, Library, Inspector } from "./runtime.js";
 const mapStateToProp = (state) => ({
   Questions: state,
 });
@@ -22,6 +24,8 @@ class App extends Component {
     super(props);
   }
   render() {
+    const runtime = new Runtime();
+    const main = runtime.module(define, Inspector.into(document.body));
     const QuestionValue = () => {
       const { id } = useParams();
       const [question] = this.props.Questions.filter(
