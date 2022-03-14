@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { useState } from 'react';
 
 const Dashboard = () => {
@@ -10,6 +10,11 @@ const Dashboard = () => {
         return (
             <div>
                 Dashboard
+                <div>
+                    <button className="btn btn-primary">
+                        <Link to="/tag/622f59196cd075ed2d5da424" style={{ color: "white", textDecoration: "none" }}>Ask Question</Link>
+                    </button>
+                </div>
             </div>
         )
     else

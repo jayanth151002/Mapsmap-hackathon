@@ -7,6 +7,7 @@ import { QuestionValue } from "./components/QuestionValue";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Dashboard from "./components/Dashboard";
+import Tags from "./components/Tags";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +22,7 @@ class App extends Component {
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/tag/:tagId' element={<Tags />} />
         </Routes>
       </div>
     );
