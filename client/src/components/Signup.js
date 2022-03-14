@@ -1,6 +1,6 @@
 import { useState } from "react"
 import axios from "axios"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 const Login = () => {
 
@@ -8,6 +8,7 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [password1, setPassword1] = useState('')
     const [password2, setPassword2] = useState('')
+    const navigate = useNavigate()
 
 
     const handleLogin = (e) => {
@@ -19,8 +20,8 @@ const Login = () => {
         else {
             axios.post('https://mapsmap.herokuapp.com/v1/api/user/signup', { name: name, email: email, password: password1, confirm_password: password2 })
                 .then((res) => {
-                    const navigate = useNavigate()
-                    navigate('/dashboard', { state: res.data })
+                    navigate('/dashboard', { state: { data: res.data } })
+                    console.log(res.data)
                 })
                 .catch(res => console.log(res))
         }

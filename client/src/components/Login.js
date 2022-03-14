@@ -6,6 +6,7 @@ const Login = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const navigate = useNavigate()
 
     const handleLogin = (e) => {
         e.preventDefault()
@@ -14,8 +15,8 @@ const Login = () => {
         else {
             axios.post('https://mapsmap.herokuapp.com/v1/api/user/signin', { email: email, password: password })
                 .then((res) => {
-                    const navigate = useNavigate()
-                    navigate('/dashboard', { state: res.data })
+                    navigate('/dashboard', { state: { data: res.data } })
+                    console.log(res.data)
                 })
                 .catch(res => console.log("err"))
         }
