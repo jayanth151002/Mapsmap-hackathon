@@ -12,6 +12,7 @@ import { Runtime, Library, Inspector } from "./runtime.js";
 const mapStateToProp = (state) => ({
   Questions: state,
 });
+
 const mapDispatchToProps = (dispatch) => ({
   Update_UpVote: (id_question, id_answer) =>
     dispatch(Update_UpVote(id_question, id_answer)),
